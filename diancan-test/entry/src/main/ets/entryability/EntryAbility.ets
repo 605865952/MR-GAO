@@ -29,7 +29,7 @@ export default class EntryAbility extends UIAbility {
       .catch((err: BusinessError) => {
         console.error('Failed to set the window layout to full-screen mode. Cause:' + JSON.stringify(err));
       });
-    windowStage.loadContent('pages/LoginPage', (err) => {
+    windowStage.loadContent('pages/RegistPage', (err) => {
       if (err.code) {
         hilog.error(DOMAIN, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err));
         return;
