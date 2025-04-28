@@ -1,0 +1,124 @@
+import { promptAction } from '@kit.ArkUI'
+
+@Entry
+@Component
+struct MinePage {
+  @State arr:number[]=[1,2,3,4,5,6,7,8,9,10]
+  scroller:Scroller=new Scroller()
+toast(s:string){
+  promptAction.showToast({
+    message:s,
+    duration:1000,
+    bottom:'360vp'
+  })
+}
+  build() {
+    Column(){
+      Blank().height(50)
+     Swiper(){
+       Image($r('app.media.banner1'))
+       Image($r('app.media.banner2'))
+       Image($r('app.media.banner3'))
+     }
+     .loop(true).autoPlay(true).interval(3000)
+     .margin({left:16,right:16})
+     .borderRadius(10)
+      .indicator(true).aspectRatio(2)
+      Row(){
+       Row(){
+         Stack(){
+           Stack().width(65).height(65)
+             .borderRadius(33)
+             .backgroundColor(Color.White)
+           Image($r('app.media.meinv0'))
+             .width(60).height(60).borderRadius(30)
+         }.alignContent(Alignment.Center)
+         Column(){
+           Text('Hi,你好')
+           Text('余额：100000')
+           Text('积分：320')
+         }.margin({left:20}).alignItems(HorizontalAlign.Start)
+       }
+      }.borderRadius(10)
+      .backgroundColor($r('app.color.tint_main'))
+      .width('95%')
+      .padding(15)
+      .margin({top:30})
+      .justifyContent(FlexAlign.SpaceBetween)
+      //堂食或外带
+      Row(){
+       Column(){
+         Image($r('app.media.tangshi'))
+           .formLogoStyle()
+         Text('堂食')
+       }.onClick(()=>{
+           this.toast('已选择：堂食')
+       })
+        Column(){
+          Image($r('app.media.dabao'))
+            .formLogoStyle()
+          Text('外带')
+        }.onClick(()=>{
+          this.toast('已选择：外带')
+        })
+      }.justifyContent(FlexAlign.SpaceBetween)
+      .borderRadius(10)
+      .height(100)
+      .width('95%')
+      .margin({top:10})
+      .padding({left:60,right:60})
+      .backgroundColor('#F5F5F5')
+      // 支付方式
+      Row(){
+        Column(){
+          Image($r('app.media.qianbao'))
+            .formLogoStyle()
+          Text('支付方式')
+        }.onClick(()=>{
+          this.toast('支付方式')
+        })
+        Column(){
+          Image($r('app.media.qiandaizi'))
+            .formLogoStyle()
+          Text('会员充值')
+        }.onClick(()=>{
+          this.toast('会员充值')
+        })
+        Column(){
+          Image($r('app.media.liwu'))
+            .formLogoStyle()
+          Text('天天福利')
+        }.onClick(()=>{
+          this.toast('天天福利')
+        })
+        Column(){
+          Image($r('app.media.kaquan'))
+            .formLogoStyle()
+          Text('我的卡券')
+        }.onClick(()=>{
+          this.toast('我的卡券')
+        })
+      }.borderRadius(10)
+      .height(100)
+      .width('95%')
+      .margin({top:10})
+      .padding({
+        left:20,
+        right:20,
+        top:10,
+        bottom:10
+      })
+      .justifyContent(FlexAlign.SpaceBetween)
+      //列表
+     Row({space:10}){
+        Image($r('app.media.hanbao')).layoutWeight(1).borderRadius(10).height(110)
+       Image($r('app.media.xican2')).layoutWeight(1).borderRadius(10).height(110)
+     }.padding(15)
+    }.width('100%').height('100%')
+  }
+}
+@Styles function  formLogoStyle(){
+  .width(40)
+  .height(30)
+  .margin({bottom:10})
+}

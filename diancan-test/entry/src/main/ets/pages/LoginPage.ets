@@ -1,0 +1,110 @@
+import {  promptAction } from '@kit.ArkUI'
+
+@Entry
+@Component
+struct LoginPage {
+  @State user:string=''
+  @State password:string=''
+
+  build() {
+    Column(){
+     //logo
+      Image($r('app.media.icon'))
+        .width('80vp')
+        .borderRadius(10)
+        .margin({bottom:'20vp'})
+      //欢迎文字
+      Text('账号登陆')
+        .fontSize('30fp')
+        .fontWeight(FontWeight.Bold)
+      //输入框
+      TextInput({placeholder:'请输入手机号'})
+        .inputStyle()
+        .maxLength(11)
+        .onChange(data=>{
+          this.user=data
+          console.log('user:'+data)
+        })
+        .margin({left:20,right:20,top:20})
+      TextInput({placeholder:'请输入密码'})
+        .type(InputType.Password)
+        .inputStyle()
+        .onChange(data=>{
+          this.password=data
+        })
+        .margin({left:20,right:20,top:20})
+    //文字提示
+      Row(){
+        Text('忘记密码')
+          .fontSize('16fp')
+          .fontColor(Color.Blue)
+          .margin({right:30,top:10})
+      }.width('100%').justifyContent(FlexAlign.End)
+      //登录按钮
+      Button('登录',{type:ButtonType.Capsule})
+        .width('50%')
+        .margin({top:20})
+        .backgroundColor($r('app.color.tint_main'))
+        .onClick(()=>{
+        this.loginBtnClick()
+        })
+      Row(){
+        Text('注册')
+          .fontSize('16fp')
+          .fontColor(Color.Blue)
+      }
+      .width('100%')
+      .justifyContent(FlexAlign.Center)
+        .margin({top:15})
+      .onClick(()=>{
+      this.loginBtnClick()
+      })
+      Row(){
+        Blank().height(0.5).backgroundColor($r('app.color.tint_gray')).layoutWeight(1)
+          .margin({left:10,right:10})
+        Text('其他登录方式')
+          .fontSize('16fp')
+          .fontColor(Color.Gray)
+        Blank().height(0.5).backgroundColor($r('app.color.tint_gray')).layoutWeight(1)
+          .margin({left:10,right:10})
+      }.width('100%').justifyContent(FlexAlign.Center)
+      .margin({top:40})
+     Row(){
+        Row({space:10}){
+          Image($r('app.media.huawei')).width(40).height(40)
+          Text('华为账号').fontSize('16fp')
+        }.layoutWeight(1).alignItems(VerticalAlign.Center).justifyContent(FlexAlign.Center)
+        Row({space:10}){
+          Image($r('app.media.weixin')).width(20).height(20)
+          Text('微信').fontSize('16fp')
+        }.layoutWeight(1).justifyContent(FlexAlign.Center).alignItems(VerticalAlign.Center)
+     }.width('100%')
+     .justifyContent(FlexAlign.SpaceAround)
+      .margin('20vp')
+    }.width('100%')
+  }
+   loginBtnClick(){
+    //判断用户名和密码非空
+     console.log('aaa'+this.user+this.password)
+    if(this.user==''||this.password==''){
+      console.log('bbb'+2)
+      promptAction.showToast({
+        message:'不能为空',
+        duration:1000,
+        bottom:'360vp'
+      })
+      return
+    }
+
+  }
+}
+//添加公共样式
+//@Extend装饰器，拓展组件样式
+//@Extend() function 样式名称
+//输入框公共样式函数
+@Extend(TextInput) function inputStyle(){
+  .placeholderColor(0x999999)
+  .maxLength(6)
+  .padding('12vp')
+  .margin('10vp')
+}
