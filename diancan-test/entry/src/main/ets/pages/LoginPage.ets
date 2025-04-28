@@ -1,5 +1,5 @@
 import {  promptAction } from '@kit.ArkUI'
-
+//登录页面标签
 @Entry
 @Component
 struct LoginPage {
