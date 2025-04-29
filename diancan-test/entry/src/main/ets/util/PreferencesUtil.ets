@@ -40,6 +40,7 @@ class PreferencesUtil{
   }
   //从Preferences实例中写入数据
   async putPreferenceValue(key:string,value:preferences.ValueType,){
+
       //写入之前判断preferences是否初始化完成
     if(!this.pref){
       console.error(`preferencs[${this.sp_name}]尚未初始化`)
@@ -47,6 +48,7 @@ class PreferencesUtil{
     }
     //将数据写入内存中
     try {
+      console.log('CCC'+'')
       await this.pref.put(key,value)
       //持久化，重启应用也可以保存数据
       await this.pref.flush()

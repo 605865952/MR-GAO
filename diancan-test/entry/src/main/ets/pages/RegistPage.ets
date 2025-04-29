@@ -1,5 +1,5 @@
 import prompt from '@ohos.prompt'
-import { promptAction } from '@kit.ArkUI'
+import { promptAction, router } from '@kit.ArkUI'
 import PreferencesUtil from '../util/PreferencesUtil'
 import { preferences } from '@kit.ArkData'
 import preferenceUtil from '../util/PreferencesUtil'
@@ -13,6 +13,10 @@ struct RegistPage {
 
   build() {
      Column(){
+        Row(){
+          Image($r('app.media.back')).width(30).height(30).borderRadius(10)
+            .margin({top:40,left:16})
+        }.justifyContent(FlexAlign.Start).width('100%').onClick(()=>{router.back()})
        Image($r('app.media.icon')).width(40).height(40).margin({bottom:'20vp',top:40})
        Text('用户注册').fontSize(18).fontWeight(FontWeight.Bold).margin({bottom:30})
 
@@ -64,13 +68,12 @@ struct RegistPage {
     }
     PreferencesUtil.putPreferenceValue('user_name',this.username)
     PreferencesUtil.putPreferenceValue('pwd',this.password)
-    let v: preferences.ValueType = await preferenceUtil.getPreferenceValue('user_name', '')
-    console.log('VVV'+v)
     promptAction.showToast({
       message:`注册成功${this.password2}=${this.password}`,
       duration:1000,
       bottom:'360vp'
     })
+    router.back()
   }
 
 }

@@ -2,6 +2,8 @@ import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.Ab
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
 import { BusinessError } from '@kit.BasicServicesKit';
+import { preferences } from '@kit.ArkData';
+import PreferencesUtil from '../util/PreferencesUtil';
 
 const DOMAIN = 0x0000;
 
@@ -36,6 +38,7 @@ export default class EntryAbility extends UIAbility {
       }
       hilog.info(DOMAIN, 'testTag', 'Succeeded in loading the content.');
     });
+    PreferencesUtil.init(this.context)
   }
 
   onWindowStageDestroy(): void {
