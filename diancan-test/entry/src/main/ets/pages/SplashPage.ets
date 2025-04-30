@@ -8,7 +8,7 @@ struct SplashPage {
   onPageShow(): void {
    this.timeId=setInterval(()=>{
      if(this.countDownSecond===0){
-       // router.replaceUrl({url:"pages/Index"})
+       router.replaceUrl({url:"pages/MinePage"})
      }else {
        this.countDownSecond--
      }

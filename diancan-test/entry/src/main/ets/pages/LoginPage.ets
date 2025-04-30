@@ -1,4 +1,7 @@
-import {  promptAction } from '@kit.ArkUI'
+import {  promptAction, router } from '@kit.ArkUI'
+import { preferences } from '@kit.ArkData'
+import PreferencesUtil from '../util/PreferencesUtil'
+
 //登录页面标签1
 @Entry
 @Component
@@ -57,7 +60,7 @@ struct LoginPage {
       .justifyContent(FlexAlign.Center)
         .margin({top:15})
       .onClick(()=>{
-      this.loginBtnClick()
+      this.registBtnClick()
       })
       Row(){
         Blank().height(0.5).backgroundColor($r('app.color.tint_gray')).layoutWeight(1)
@@ -83,7 +86,8 @@ struct LoginPage {
       .margin('20vp')
     }.width('100%')
   }
-   loginBtnClick(){
+
+  async loginBtnClick(){
     //判断用户名和密码非空
      console.log('aaa'+this.user+this.password)
     if(this.user==''||this.password==''){
@@ -95,7 +99,54 @@ struct LoginPage {
       })
       return
     }
-
+    let v:preferences.ValueType= await PreferencesUtil.getPreferenceValue('user_name','')
+       if(v==''){
+         promptAction.showToast({
+           message:'您还没注册',
+           duration:1000,
+           bottom:'360vp'
+         })
+         return
+       }
+       if(this.user!=v){
+         promptAction.showToast({
+           message:'手机号不正确',
+           duration:1000,
+           bottom:'360vp'
+         })
+         return
+       }
+       let v2:preferences.ValueType=await PreferencesUtil.getPreferenceValue('pwd','')
+    console.log('GGGG'+v2)
+    if(v2==''){
+      promptAction.showToast({
+        message:'密码不嫩为空',
+        duration:1000,
+        bottom:'360vp'
+      })
+      return
+    }
+    if(v2!=this.password){
+      promptAction.showToast({
+        message:'密码不正确',
+        duration:1000,
+        bottom:'360vp'
+      })
+      return
+    }
+    promptAction.showToast({
+      message: '登录成功',
+      duration: 1000,
+      bottom: '360vp'
+    })
+    router.replaceUrl({
+      url:'pages/SplashPage'
+    })
+  }
+  registBtnClick(){
+    router.pushUrl({
+      url:'pages/RegistPage'
+    })
   }
 }
 //添加公共样式
