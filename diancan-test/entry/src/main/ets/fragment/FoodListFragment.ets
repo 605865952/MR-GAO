@@ -1,4 +1,4 @@
-@Preview
+@Entry
 @Component
 struct FoodListFragment {
   build() {
@@ -12,7 +12,25 @@ struct FoodListFragment {
                 Text($r('app.string.restaurant_name'))
                   .fontWeight(700)
                   .sentenceStyle()
+                  .margin({right:10})
+                Text('[切换餐厅]')
+                  .fontColor(Color.White)
+                  .fontSize(15)
               }
+              Row(){
+                Image($r('app.media.map'))
+                  .width(15)
+                  .margin({right:5})
+                  .fillColor(Color.Red)
+                Text('宿舍34号楼南侧')
+                  .sentenceStyle()
+                  .fontSize(15)
+              }.margin({top:6})
+            }.alignItems(HorizontalAlign.Start)
+            Row(){
+              Text('评价')
+                .sentenceStyle()
+                .fontWeight(700)
             }
           }
           .justifyContent(FlexAlign.SpaceBetween)
@@ -20,6 +38,48 @@ struct FoodListFragment {
           .padding(10)
         }.padding({top:10,left:16})
       }.height(150)
+      //搜索框
+      Row(){
+      Image($r('app.media.search'))
+        .width(21).margin({left:16})
+     TextInput({placeholder:'搜索食物'})
+       .textAlign(TextAlign.Start)
+       .backgroundColor(Color.Transparent)
+       .onChange((value:string)=>{
+
+       })
+       .layoutWeight(1)
+        Text('搜索')
+          .fontSize(16)
+          .fontColor(Color.White)
+          .backgroundColor($r('app.color.main'))
+          .margin({right:16})
+          .padding({left:14,top:4,right:14,bottom:4})
+          .borderRadius(20)
+          .onClick(()=>{
+
+          })
+      }.margin(15).borderRadius(20)
+      .backgroundColor($r('app.color.tint_gray'))
+      //商品列表
+      Row(){
+        //左侧分类
+        Column(){
+         Scroll(){
+
+         }.scrollable(ScrollDirection.Vertical)
+          .scrollBarWidth(5)
+          .edgeEffect(EdgeEffect.Fade)
+          .scrollBar(BarState.Off)
+
+        }
+        .width('25%')
+        .height('100%')
+        .backgroundColor($r('app.color.gray_bg'))
+        .alignItems(HorizontalAlign.Start)
+        .justifyContent(FlexAlign.Start)
+        .margin({left:0})
+      }
     }
   }
 
